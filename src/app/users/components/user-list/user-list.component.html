@@ -1,0 +1,52 @@
+<app-card>
+  <app-card-body>
+      <div class="row">
+        <div class="column-80"></div>
+        <div class="column-20 mt-5 text-end">
+          <input type="text" name="search" placeholder="Search User ..." (input)="onSearchData($event)">
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th *ngFor="let item of header; let i = index">
+              {{ item.label }}&nbsp;
+              <ng-container *ngIf="item.sort" >
+                <a (click)="onSort(i)">
+                  <ng-container *ngIf="!item.activeSort; else activeSort">
+                    <app-icon [icon]="'up-down'"></app-icon>
+                  </ng-container>
+
+                  <ng-template #activeSort>
+                    <app-icon [icon]="'sort-down'" *ngIf="item.descSort"></app-icon>
+                    <app-icon [icon]="'sort-up'" *ngIf="!item.descSort"></app-icon>
+                  </ng-template>
+                </a>
+              </ng-container>
+
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let user of listUsers; let i = index">
+            <td>{{ user.firstName | titlecase }} {{ user.lastName | titlecase }}</td>
+            <td class="center"> {{ calculateAge(user.dateOfBirth) }} Years</td>
+            <td class="center">{{ user.dateOfBirth }}</td>
+            <td class="center">{{ user.gender }}</td>
+            <td>{{ user.language }}</td>
+            <td class="center">{{ user.qualification }}</td>
+            <td>{{ user.specialization }}</td>
+            <td>{{ user.contact }}</td>
+            <td class="center">
+              <img [src]="user.image">
+            </td>
+            <td class="center">
+              <a (click)="editUser(i)"><app-icon [icon]="'edit'"></app-icon></a>&nbsp;&nbsp;&nbsp;&nbsp;
+              <a (click)="removeUser(i)"><app-icon [icon]="'remove'"></app-icon></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  </app-card-body>
+</app-card>

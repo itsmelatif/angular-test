@@ -1,0 +1,11 @@
+<div class="first box">
+  <ul>
+    <li *ngFor="let item of configuration">
+      <button (click)="onChangeStyle(item.label)" [title]="item.label"><app-icon [icon]="item.icon"></app-icon></button>
+    </li>
+    <li><input type="color" id="color" [value]="defaultTextEditor.color" (input)="changeColor($event)" (change)="changeColor($event)"></li>
+    <li><input type="number" id="font-size" min="1" max="100" [value]="defaultTextEditor.fontSize" (input)="changeFont($event)" (change)="changeFont($event)"></li>
+  </ul>
+
+
+</div>

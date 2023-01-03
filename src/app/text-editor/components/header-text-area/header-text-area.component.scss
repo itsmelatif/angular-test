@@ -1,0 +1,22 @@
+.box {
+  display: inline-block;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+
+  li {
+    list-style: none;
+    float: left;
+    margin-right: 5px;
+  }
+}
+
+button {
+  width: 60px;
+  height: 40px;
+  background-color: transparent;
+  color:#000
+}

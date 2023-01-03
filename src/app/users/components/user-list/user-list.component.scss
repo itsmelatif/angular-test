@@ -1,0 +1,31 @@
+table {
+  width: 100%;
+  border: 1;
+  border-collapse: collapse;
+
+  tr {
+    border:1px solid #dee2e6;
+  }
+
+  th {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border:1px solid #dee2e6;
+  }
+
+  td{
+    padding: 10px;
+
+    &.center {
+      text-align: center;
+    }
+  }
+
+  img {
+    width: 100px;
+  }
+
+  a {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,11 @@
+<nav>
+  <div class="nav-header">
+    <h1>Angular Test</h1>
+  </div>
+
+  <ul>
+    <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/']" >Home</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/crud-users']">Test #1 (CRUD - Users)</a></li>
+    <li routerLinkActive="active"><a [routerLink]="['/text-editor']">Test #2 (Text Editor)</a></li>
+  </ul>
+</nav>

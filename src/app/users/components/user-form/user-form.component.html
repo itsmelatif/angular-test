@@ -1,0 +1,141 @@
+<app-card>
+  <form [formGroup]="userForm" (submit)="onSubmit()">
+  <app-card-title>User Form</app-card-title>
+
+  <app-card-body>
+    <div class="row">
+
+      <div class="column-45">
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">First Name</div>
+            <div class="column-70">
+              <input type="text" formControlName="firstName" (input)="validateName('firstName')" [ngClass]="{'invalid': onInvalid('firstName')}" />
+              <small class="invalid-text" *ngIf="onInvalid('firstName')">* {{ showError('firstName') }}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">Gender</div>
+            <div class="column-70">
+                <input type="radio" value="Male" formControlName="gender" [ngClass]="{'invalid': onInvalid('gender')}"> Male
+                <input type="radio" value="Female" formControlName="gender" [ngClass]="{'invalid': onInvalid('gender')}"> Female
+                <br>
+                <small class="invalid-text" *ngIf="onInvalid('gender')">* {{ showError('gender') }}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">Address</div>
+            <div class="column-70">
+              <textarea formControlName="address" [ngClass]="{'invalid': onInvalid('address')}"></textarea>
+              <small class="invalid-text" *ngIf="onInvalid('address')">* {{ showError('address') }}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">Qualification</div>
+            <div class="column-70">
+             <select formControlName="qualification" [ngClass]="{'invalid': onInvalid('qualification')}">
+              <option>Post Graduate</option>
+              <option>Under Graduate</option>
+             </select>
+             <small class="invalid-text" *ngIf="onInvalid('qualification')">* {{ showError('qualification') }}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">Profile Image</div>
+            <div class="column-70">
+              <input type="file"  (change)="onFileSelected($event)">
+              <small class="invalid-text" *ngIf="onInvalid('image')">* {{ showError('image') }}</small>
+              <img [src]="imagePath">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column-10"></div>
+
+      <div class="column-45">
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">Last Name</div>
+            <div class="column-70">
+              <input type="text" formControlName="lastName" (input)="validateName('lastName')" [ngClass]="{'invalid': onInvalid('lastName')}"/>
+              <small class="invalid-text" *ngIf="onInvalid('lastName')">* {{ showError('lastName') }}</small>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">DOB</div>
+            <div class="column-70">
+              <input type="date" formControlName="dateOfBirth" [ngClass]="{'invalid': onInvalid('dateOfBirth')}" />
+              <small class="invalid-text" *ngIf="onInvalid('dateOfBirth')">* {{ showError('dateOfBirth') }}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">Language Known</div>
+            <div class="column-70">
+                <ul>
+                  <ng-container formArrayName="language">
+                    <li *ngFor="let item of listLanguages; let i = index"><input type="checkbox" (change)="onSelectLanguage(i)" [attr.checked]="selectedCheckbox(item)"> {{ item }}</li>
+                  </ng-container>
+                  <li *ngIf="otherLanguages"><input type="text"  formControlName="otherLanguage" /></li>
+                </ul>
+
+                <small class="invalid-text" *ngIf="onInvalid('language')">* {{ showError('language') }}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">Specialization</div>
+            <div class="column-70">
+              <div class="column-70"><input type="text" formControlName="specialization" [ngClass]="{'invalid': onInvalid('specialization')}"/></div>
+              <small class="invalid-text" *ngIf="onInvalid('specialization')">* {{ showError('specialization') }}</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="column-30">Contact #</div>
+            <div class="column-70">
+              <div class="column-70"><input type="text" (input)="validateContact()" formControlName="contact" [ngClass]="{'invalid': onInvalid('contact')}" /></div>
+              <small class="invalid-text" *ngIf="onInvalid('contact')">* {{ showError('contact') }}</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </app-card-body>
+
+  <app-card-footer>
+      <button type="reset" class="secondary" (click)="onCancel()">Cancel</button>&nbsp;&nbsp;
+      <button type="submit">
+        <ng-container *ngIf="isEdit">Update</ng-container>
+        <ng-container *ngIf="!isEdit">Save</ng-container>
+      </button>
+  </app-card-footer>
+  </form>
+</app-card>
