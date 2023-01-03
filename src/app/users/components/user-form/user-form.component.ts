@@ -56,18 +56,10 @@ export class UserFormComponent implements OnInit, OnDestroy {
    const subsSelect = this.usersService.selectedUser$.subscribe({
       next: (res) => {
         this.isEdit = true;
+        this.userForm.patchValue(res);
 
-        this.userForm.patchValue({
-          firstName: res.firstName,
-          gender: res.gender,
-          address: res.address,
-          qualification: res.qualification,
-          image: res.image,
-          lastName: res.lastName,
-          dateOfBirth: res.dateOfBirth,
-          otherLanguge: res.otherLanguage,
-          specialization: res.specialization,
-          contact: res.contact
+        res.language.forEach(el => {
+          this.language.push(new FormControl(el));
         })
       },
       error: (err) => {
@@ -125,6 +117,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
   }
 
   selectedCheckbox(item: string): boolean | null {
+    console.log(this.userForm.value.language.includes(item));
     return this.userForm.value.language.includes(item) ? true : null;
   }
 
